@@ -38,4 +38,41 @@ const getMods = (bitwiseMods) => {
     return enabledMods;
 }
 
-module.exports = { getMods };
+/**
+ * @param {number} approvedState is the state number of the map
+ */
+const getMapStatus = (approvedState) => {
+    const states = [
+        {
+            title: 'Pending',
+            icon: './assets/icons/pending-gy-wip.png'
+        },
+        {
+            title: 'Ranked',
+            icon: './assets/icons/ranked.png'
+        },
+        {
+            title: 'Approved',
+            icon: './assets/icons/qualif-approv.png'
+        },
+        {
+            title: 'Qualified',
+            icon: './assets/icons/qualif-approv.png'
+        },
+        {
+            title: 'Loved',
+            icon: './assets/icons/loved.png'
+        }];
+    return states[approvedState]
+}
+
+const getAccuracy = (scoreData) => {
+    const notes = {
+        50: parseInt(scoreData.count50),
+        100: parseInt(scoreData.count100),
+        300: parseInt(scoreData.count300),
+        miss: parseInt(scoreData.countmiss),
+    }
+    return Math.floor(((50 * notes["50"]) + (100 * notes["100"]) + (300 * notes["300"])) / (300 * (notes.miss + notes["50"] + notes["100"] + notes["300"])) * 10000) / 100;
+}
+module.exports = {getMods, getMapStatus, getAccuracy};
