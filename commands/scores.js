@@ -1,5 +1,6 @@
 const {MessageEmbed} = require('discord.js');
 const $API = require('./../utils/api')
+const { getMods } = require('./../utils/osuConverters')
 
 async function scores(msg, param) {
     if (!param.length) {
@@ -61,7 +62,7 @@ async function scores(msg, param) {
                                 Score: **${score}**
                                 Rank: **${rank}**
                                 FC: **${(perfect === '1' ? '✅' : '❌')}**
-                                Mods: **${enabled_mods}**
+                                Mods: **${getMods(enabled_mods).join('')}**
                                 `, true)
                     .setImage(`https://assets.ppy.sh/beatmaps/${beatmapset_id}/covers/cover.jpg`)
                     .setFooter(`Played by ${username} on ${date}.`)
