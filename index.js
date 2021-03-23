@@ -4,6 +4,7 @@ const client = new Client();
 
 const User = require('./commands/user')
 const Scores = require('./commands/scores')
+const Recent = require('./commands/recent')
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -15,6 +16,7 @@ client.on('message', msg => {
     if (prefix === '/osu') {
         if (command === 'user') User(msg, param);
         if (command === 'scores') Scores(msg, param);
+        if (command === 'recent') Recent(msg, param);
     }
 });
 

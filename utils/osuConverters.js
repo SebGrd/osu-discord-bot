@@ -75,4 +75,35 @@ const getAccuracy = (scoreData) => {
     }
     return Math.floor(((50 * notes["50"]) + (100 * notes["100"]) + (300 * notes["300"])) / (300 * (notes.miss + notes["50"] + notes["100"] + notes["300"])) * 10000) / 100;
 }
-module.exports = {getMods, getMapStatus, getAccuracy};
+
+const getRankIcon = (rank) => {
+    const ranks = {
+        XH: './assets/icons/xh.png',
+        X: './assets/icons/ss.png',
+        SH: './assets/icons/sx.png',
+        S: './assets/icons/s.png',
+        A: './assets/icons/a.png',
+        B: './assets/icons/b.png',
+        C: './assets/icons/c.png',
+        D: './assets/icons/d.png',
+        F: './assets/icons/f.png',
+    }
+    return ranks[rank];
+}
+
+const getRankEmoji = (rank) => {
+    const ranks = {
+        XH: '<:ssx:823710568685895711>',
+        X: '<:ss:823710568933621770>',
+        SH: '<:sx:823710568946204702>',
+        S: '<:s_:823710568811593729>',
+        A: '<:a_:823710568573042719>',
+        B: '<:b_:823710568937422848>',
+        C: '<:c_:823710568635695176>',
+        D: '<:d_:823710569013837854>',
+        F: '<:f_:823710569101393990>',
+    }
+    return ranks[rank];
+}
+
+module.exports = {getMods, getMapStatus, getAccuracy, getRankEmoji, getRankIcon};

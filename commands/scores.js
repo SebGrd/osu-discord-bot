@@ -1,7 +1,7 @@
 const {MessageEmbed} = require('discord.js');
 const $API = require('./../utils/api')
 const {getMods, getMapStatus, getAccuracy} = require('./../utils/osuConverters')
-const { formatSeconds } = require('./../utils/converters')
+const {formatSeconds} = require('./../utils/converters')
 const {MessageAttachment} = require('discord.js')
 
 async function scores(msg, param) {
@@ -46,7 +46,7 @@ async function scores(msg, param) {
                     .addField(
                         'Notes',
                         `Accuracy: **${accuracy}%**
-                                ❌: **${countmiss}**
+                                X: **${countmiss}**
                                 50: **${count50}**
                                 100: **${count100}**
                                 300: **${count300}**
@@ -93,6 +93,7 @@ async function scores(msg, param) {
 
             msg.reply(embed);
         }
+
     }
 }
 
