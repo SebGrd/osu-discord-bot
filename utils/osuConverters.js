@@ -38,6 +38,25 @@ const getMods = (bitwiseMods) => {
     return enabledMods;
 }
 
+const getModsEmoji = (mods) => {
+    const emojis = {
+        None: '<:nomod:823717994965237811>',
+        NF: '<:nf:823717994902978570>',
+        EZ: '<:ez:823717994949246976>',
+        TD: '<:td:823717994681073725>',
+        HD: '<:hd:823717994688806913>',
+        HR: '<:hr:823717994911105084>',
+        SD: '<:sd:823717994911498240>',
+        DT: '<:dt:823717994655645707>',
+        HT: '<:ht:823717994931683359>',
+        NC: '<:nc:823717994995777583>', // Only set along with DoubleTime. i.e: NC only gives 576
+        FL: '<:fl:823717994886201384>',
+        SO: '<:so:823717995029200916>',
+        PF: '<:pg:823717994765090837>', // Only set along with SuddenDeath. i.e: PF only gives 16416
+    };
+    return mods.map((mod) => emojis[mod])
+}
+
 /**
  * @param {number} approvedState is the state number of the map
  */
@@ -106,4 +125,20 @@ const getRankEmoji = (rank) => {
     return ranks[rank];
 }
 
-module.exports = {getMods, getMapStatus, getAccuracy, getRankEmoji, getRankIcon};
+const getCompletionPercentage = (scoreData, beatmapData) => {
+    const notes = {
+        50: parseInt(scoreData.count50),
+        100: parseInt(scoreData.count100),
+        300: parseInt(scoreData.count300),
+        miss: parseInt(scoreData.countmiss),
+    }
+    const hitNotes = notes['50'] + notes['100'] + notes['300'] + notes.miss;
+    const totalNotes = beatmapData.max_combo;
+    return Math.floor(hitNotes / totalNotes * 100)
+}
+
+const getProgress = () => {
+
+}
+
+module.exports = {getMods, getMapStatus, getAccuracy, getRankEmoji, getRankIcon, getModsEmoji, getCompletionPercentage};
