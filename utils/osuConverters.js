@@ -125,6 +125,16 @@ const getRankEmoji = (rank) => {
     return ranks[rank];
 }
 
+const getNotesEmoji = (note) => {
+    const notes = {
+        miss: '<:miss:823710624248102932>',
+        50: '<:50:823710624017154070>',
+        100: '<:100:823710624382976040>',
+        300: '<:300:823710624273793074>',
+    }
+    return notes[note];
+}
+
 const getCompletionPercentage = (scoreData, beatmapData) => {
     const notes = {
         50: parseInt(scoreData.count50),
@@ -133,7 +143,9 @@ const getCompletionPercentage = (scoreData, beatmapData) => {
         miss: parseInt(scoreData.countmiss),
     }
     const hitNotes = notes['50'] + notes['100'] + notes['300'] + notes.miss;
-    const totalNotes = beatmapData.max_combo;
+    console.log(hitNotes)
+    const totalNotes = parseInt(beatmapData.count_normal) + parseInt(beatmapData.count_slider) + parseInt(beatmapData.count_spinner);
+    console.log(totalNotes)
     return Math.floor(hitNotes / totalNotes * 100)
 }
 
@@ -141,4 +153,13 @@ const getProgress = () => {
 
 }
 
-module.exports = {getMods, getMapStatus, getAccuracy, getRankEmoji, getRankIcon, getModsEmoji, getCompletionPercentage};
+module.exports = {
+    getMods,
+    getMapStatus,
+    getAccuracy,
+    getRankEmoji,
+    getRankIcon,
+    getModsEmoji,
+    getCompletionPercentage,
+    getNotesEmoji
+};

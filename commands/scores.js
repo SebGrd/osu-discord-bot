@@ -1,6 +1,6 @@
 const {MessageEmbed} = require('discord.js');
 const $API = require('./../utils/api')
-const {getMods, getMapStatus, getAccuracy} = require('./../utils/osuConverters')
+const {getMods, getMapStatus, getAccuracy, getNotesEmoji, getModsEmoji, getRankEmoji} = require('./../utils/osuConverters')
 const {formatSeconds} = require('./../utils/converters')
 const {MessageAttachment} = require('discord.js')
 
@@ -46,19 +46,19 @@ async function scores(msg, param) {
                     .addField(
                         'Notes',
                         `Accuracy: **${accuracy}%**
-                                X: **${countmiss}**
-                                50: **${count50}**
-                                100: **${count100}**
-                                300: **${count300}**
-                                Max combo: **${maxcombo}/${max_combo}**
+                                ${getNotesEmoji('miss')}: **${countmiss}**
+                                ${getNotesEmoji('50')}: **${count50}**
+                                ${getNotesEmoji('100')}: **${count100}**
+                                ${getNotesEmoji('300')}: **${count300}**
+                                Max combo: **${maxcombo}/${max_combo}x**
                                 `, true)
                     .addField(
                         'Score',
-                        `PP: **${pp}**
+                        `PP: **${Math.round(pp)}**
                                 Score: **${score}**
-                                Rank: **${rank}**
+                                Rank: **${getRankEmoji(rank)}**
                                 FC: **${(perfect === '1' ? '✅' : '❌')}**
-                                Mods: **${getMods(enabled_mods).join('')}**
+                                Mods: ${getModsEmoji(getMods(enabled_mods))}
                                 `, true)
                     .setImage(`https://assets.ppy.sh/beatmaps/${beatmapset_id}/covers/cover.jpg`)
                     .setFooter(`Played by ${username} on ${date}.`)
